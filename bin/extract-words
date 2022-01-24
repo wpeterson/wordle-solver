@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+ALL_WORDS=$1
+
+cat $ALL_WORDS | dos2unix | egrep '^[a-z]{5}$'
