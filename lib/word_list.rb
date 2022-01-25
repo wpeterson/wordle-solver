@@ -9,7 +9,7 @@ class WordList
     @words = words
   end
 
-  def self.wordle_words
+  def self.all
     from_file(WORD_FILE)
   end
 
@@ -29,17 +29,17 @@ class WordList
     words.size
   end
 
-  def without_letters(letters)
+  def without(letters)
     letters_regex = regex_for_letters(letters)
     self.class.new(words.select {|word| !word.match(letters_regex) })
   end
 
-  def with_letters(letters)
+  def with(letters)
     letters_regex = regex_for_letters(letters)
     self.class.new(words.select {|word| word.match(letters_regex) })
   end
 
-  def filter(pattern)
+  def match(pattern)
     self.class.new(prefix_trie.wildcard(pattern))
   end
 
