@@ -3,8 +3,14 @@ require 'algorithms'
 class WordList
   attr_reader :words
 
+  WORD_FILE = File.join(File.dirname(__FILE__), '../data/5letter_alpha.txt')
+
   def initialize(words)
     @words = words
+  end
+
+  def self.wordle_words
+    from_file(WORD_FILE)
   end
 
   def self.from_file(path)
