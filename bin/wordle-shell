@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'irb'
+require_relative '../lib/word_list'
+
+IRB.start(__FILE__)
