@@ -30,12 +30,16 @@ class WordList
   end
 
   def without(letters)
-    letters_regex = regex_for_letters(letters)
+    letters = letters.chars if letters.is_a?(String)
+    letters_regex = /(#{letters.join('|')})/
+
     self.class.new(words.select {|word| !word.match(letters_regex) })
   end
 
   def with(letters)
-    letters_regex = regex_for_letters(letters)
+    letters = letters.chars if letters.is_a?(String)
+    letters_regex = Regexp.new letters.map {|l| "(?=.*#{l})" }.join
+
     self.class.new(words.select {|word| word.match(letters_regex) })
   end
 
@@ -44,12 +48,6 @@ class WordList
   end
 
 private
-
-  def regex_for_letters(letters)
-    letters = letters.chars if letters.is_a?(String)
-
-    /(#{letters.join('|')})/
-  end
 
   def prefix_trie
     @prefix_trie ||= Containers::Trie.new.tap { |trie| words.each { |word| trie.push(word, word) } }
