@@ -14,11 +14,11 @@ class WordList
   end
 
   def self.from_file(path)
-    new(File.open(path) { |file| file.each.map {|line| line.chomp } })
+    new(File.open(path) { |file| file.each.map {|line| line.chomp.downcase } })
   end
 
   def is_valid?(word)
-    prefix_trie.has_key?(word)
+    prefix_trie.has_key?(word.downcase)
   end
 
   def each
@@ -40,11 +40,11 @@ class WordList
     letters = letters.chars if letters.is_a?(String)
     letters_regex = Regexp.new letters.map {|l| "(?=.*#{l})" }.join
 
-    self.class.new(words.select {|word| word.match(letters_regex) })
+    match(letters_regex)
   end
 
-  def match(pattern)
-    self.class.new(prefix_trie.wildcard(pattern))
+  def match(regex)
+    self.class.new(words.select {|word| word.match(regex) })
   end
 
 private
