@@ -1,5 +1,3 @@
 #!/usr/bin/env bash
 
-ALL_WORDS=$1
-
-cat $ALL_WORDS | dos2unix | egrep '^[a-z]{5}$'
+cat data/google_books_freq.tsv | dos2unix | cut -f1 | egrep '^[a-z]{5}$'

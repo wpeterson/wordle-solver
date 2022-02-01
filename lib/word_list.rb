@@ -3,7 +3,7 @@ require 'algorithms'
 class WordList
   attr_reader :words
 
-  WORD_FILE = File.join(File.dirname(__FILE__), '../data/5letter_alpha.txt')
+  WORD_FILE = File.join(File.dirname(__FILE__), '../data/wordle_sorted_words.txt')
 
   def initialize(words)
     @words = words
